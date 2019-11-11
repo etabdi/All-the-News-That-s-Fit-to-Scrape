@@ -14,13 +14,10 @@ body {
 
 /* include the board in the center of the viewport */
 .board {
-  max-width: 800px;
+  max-width: 1200px;
   width: 90vw;
   margin: 4rem auto;
-  /* display grid without specifying any structure, at least beyond the media query
-  this is mostly helpful for alignment purposes
-  */
-  overflow:scroll;
+   overflow:scroll;
   display: grid;
   height:600px;
   border: 4px solid hsl(207, 79%, 21%);

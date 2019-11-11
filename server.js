@@ -93,6 +93,7 @@ app.get("/scrape", function(req, res) {
 		});
 		console.log("Scrape finished.");
 		res.redirect("/");
+
 	});
 });
 
