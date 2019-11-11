@@ -20,7 +20,9 @@ body {
   /* display grid without specifying any structure, at least beyond the media query
   this is mostly helpful for alignment purposes
   */
+  overflow:scroll;
   display: grid;
+  height:600px;
   border: 4px solid hsl(207, 79%, 21%);
   background: #fff;
   box-shadow: 0 2px 5px hsla(0, 0%, 0%, 0.3);
@@ -103,7 +105,15 @@ a background is specified in the script */
   background: hsl(200, 100%, 10%);
   border-radius: 5px;
 }
-
+.footer {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  background-color: rgb(10, 0, 0);
+  color: white;
+  text-align: center;
+}
 /* remove the default properties of the anchor links describing the news items */
 .news--item {
   text-decoration: none;

@@ -5,14 +5,18 @@
         <div class="well">
             <div class="row">
                 <div class="col col-md-7">
-                    <h4><a href="{{this.link}}">{{this.title}}</a></h4>
+                    <h4>{{this.title}}</h4>
+                               <summary>{{this.summary}}</summary>
+                                <img class="media" src="{{this.img}}">
+                    <h4><a href="{{this.link}}">Read More</a></h4>
                 </div>
                 <div class="col col-md-2">
                     <form class="form-inline" action="/save/{{this.id}}" method="POST">
                         <button type="submit" class="btn btn-success">Save Article</button>
                     </form>
-              <summary>{{this.summary}}</summary>
-<img class="media" src="{{this.img}}">
+     <ul>
+                    
+                </ul>
                 </div>
                 <div class="col col-md-2">
                     <form class="form-inline" action="/dismiss/{{this.id}}?_method=DELETE" method="POST">
@@ -23,5 +27,8 @@
         </div>
     {{/each}}
 </div>    
+<div class="footer">
+  <p>Footer</p>
+</div>
 
           

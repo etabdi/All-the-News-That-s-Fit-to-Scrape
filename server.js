@@ -65,7 +65,7 @@ app.get("/scrape", function(req, res) {
       // Save an empty result object
       var result = {};
       var summary = $(element).find("p.summary").text().trim();
-			var img = $(element).parent().find("figure.media").find("img").attr("data-srcset");
+			var img = $(element).parent().find("figure.media").find("img").attr("src");
       
 
       // Add the text and href of every link, and save them as properties of the result object
@@ -75,16 +75,10 @@ app.get("/scrape", function(req, res) {
       result.link = $(this)
         .children("a")
 		.attr("href");
-
-		result.summary= $(this)
-        .find("p")
-		.attr("href");
-
-		result.img= $(this)
-        .children("a")
-		.attr("src");
 	
-	
+		result.img =$(this)
+		  .children("img")
+		  .attr("href")
 
         var entry = new Article(result);
 			Article.find({title: result.title}, function(err, data) {
