@@ -1,0 +1,21 @@
+
+{{#each saved}}
+   <div class="well">
+            <div class="row">
+                <div class="col row-md-7">
+<div class="story-body" id={{this._id}}>
+<h4>
+<a href="{{this.link}}" target="_blank">{{this.title}}</a>
+<form action="/save/{{this._id}}" method="POST">
+<hr>
+</h4>
+<button type="submit" class="status" value="{{this.status}}">Unsaved</button>
+<a href="/" >Back</a>
+</form>
+
+<img class="media" src="{{this.img}}">
+</div>
+</div>
+</div>
+</div>
+{{/each}}
