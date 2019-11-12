@@ -1,26 +1,16 @@
+
+var Article = require("./models/Article");
 var express = require("express");
 var logger = require("morgan");
 var mongoose = require("mongoose");
 var exphbs = require("express-handlebars");
-
-// Our scraping tools
-// Axios is a promised-based http library, similar to jQuery's Ajax method
-// It works on the client and on the server
 var axios = require("axios");
 var cheerio = require("cheerio");
 
-var Note = require("./models/Note");
-var Article = require("./models/Article");
-
-
-
-
-// Require all models
-
 var PORT = 3000;
-
-// Initialize Express
 var app = express();
+app.use(express.static("public"));
+
 
 // Configure middleware
 
@@ -30,18 +20,17 @@ app.use(logger("dev"));
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 // Make public a static folder
-app.use(express.static("public"));
 
 app.engine("handlebars", exphbs({defaultLayout: "main"}));
 app.set("view engine", "handlebars");
 
+const dbURI = process.env.MONGODB_URI || "mongodb://localhost:27017/newsArticles";
 
-var MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost/true-news";
+// Database configuration with mongoose
+mongoose.set('useCreateIndex', true)
+mongoose.connect(dbURI, { useNewUrlParser: true });
 
-mongoose.connect(MONGODB_URI);
-
-
-// Routes
+const db = mongoose.connection;
 
 app.get("/", function(req, res) {
 	Article.find({}, null, {sort: {created: -1}}, function(err, data) {
@@ -55,22 +44,17 @@ app.get("/", function(req, res) {
 });
 
 
-// A GET route for scraping the echoJS website
 app.get("/scrape", function(req, res) {
-  // First, we grab the body of the html with axios
+ 
   axios.get("https://www.nytimes.com/section/world").then(function(response) {
-    // Then, we load that into cheerio and save it to $ for a shorthand selector
+   
     var $ = cheerio.load(response.data);
-
-    // Now, we grab every h2 within an article tag, and do the following:
     $("article h2").each(function(i, element) {
-      // Save an empty result object
+
       var result = {};
       var summary = $(element).find("p.summary").text().trim();
 			var img = $(element).parent().find("figure.media").find("img").attr("src");
-      
-
-      // Add the text and href of every link, and save them as properties of the result object
+     
       result.title = $(this)
         .children("a")
         .text();
@@ -108,25 +92,6 @@ app.get("/saved", function(req, res) {
 	});
 });
 
-app.get("/:id", function(req, res) {
-	Article.findById(req.params.id, function(err, data) {
-		res.json(data);
-	})
-})
-
-app.post("/search", function(req, res) {
-	console.log(req.body.search);
-	Article.find({$text: {$search: req.body.search, $caseSensitive: false}}, null, {sort: {created: -1}}, function(err, data) {
-		console.log(data);
-		if (data.length === 0) {
-			res.render("placeholder", {message: "Nothing has been found. Please try other keywords."});
-		}
-		else {
-			res.render("search", {search: data})
-		}
-	})
-});
-
 app.post("/save/:id", function(req, res) {
 	Article.findById(req.params.id, function(err, data) {
 		if (data.issaved) {
@@ -144,13 +109,6 @@ app.post("/save/:id", function(req, res) {
 
 ;
 
-app.get("/note/:id", function(req, res) {
-	var id = req.params.id;
-	Article.findById(id).populate("note").exec(function(err, data) {
-		res.send(data.note);
-	})
-})
-// Start the server
+
 app.listen(PORT, function() {
-  console.log("App running on port " + PORT + "!");
-});
+  console.log("App running on port " + PORT + "!");});
