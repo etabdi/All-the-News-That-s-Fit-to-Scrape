@@ -1,4 +1,3 @@
-
 var Article = require("./models/Article");
 var express = require("express");
 var logger = require("morgan");
@@ -6,8 +5,11 @@ var mongoose = require("mongoose");
 var exphbs = require("express-handlebars");
 var axios = require("axios");
 var cheerio = require("cheerio");
+var databaseUrl = 'mongodb://localhost/true-news';
+var body = require("body-parser");
+var method = require("method-override");
 
-var PORT = 3000;
+
 var app = express();
 app.use(express.static("public"));
 
@@ -21,16 +23,41 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 // Make public a static folder
 
+if (process.env.MONGODB_URI) {
+	mongoose.connect(process.env.MONGODB_URI);
+}
+else {
+	mongoose.connect(databaseUrl);
+};
+
+mongoose.Promise = Promise;
+var db = mongoose.connection;
+
+db.on("error", function(error) {
+	console.log("Mongoose Error: ", error);
+});
+
+db.once("open", function() {
+	console.log("Mongoose connection successful.");
+});
+
+
+var app = express();
+var port = process.env.PORT || 3000;
+
+// app set-ups
+
+app.use(logger("dev"));
+app.use(express.static("public"));
+app.use(body.urlencoded({extended: false}));
+app.use(method("_method"));
 app.engine("handlebars", exphbs({defaultLayout: "main"}));
 app.set("view engine", "handlebars");
 
-const dbURI = process.env.MONGODB_URI || "mongodb://localhost:27017/newsArticles";
+app.listen(port, function() {
+	console.log("Listening on port " + port);
+})
 
-// Database configuration with mongoose
-mongoose.set('useCreateIndex', true)
-mongoose.connect(dbURI, { useNewUrlParser: true });
-
-const db = mongoose.connection;
 
 app.get("/", function(req, res) {
 	Article.find({}, null, {sort: {created: -1}}, function(err, data) {
@@ -109,6 +136,3 @@ app.post("/save/:id", function(req, res) {
 
 ;
 
-
-app.listen(PORT, function() {
-  console.log("App running on port " + PORT + "!");});

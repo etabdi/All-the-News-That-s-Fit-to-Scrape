@@ -4,11 +4,11 @@ var Schema = mongoose.Schema;
 var Articleschema = new Schema({
 	title: {
 		type: String,
-		required: true,
+		required: false,
 	},
 	link: {
 		type: String,
-		required: true,
+		required: false,
 	},
 	summary: {
 		type: String,
@@ -30,10 +30,7 @@ var Articleschema = new Schema({
 		type: Date,
 		default: Date.now
 	},
-	note: {
-		type: Schema.Types.ObjectId,
-		ref: "Note"
-	}
+	
 });
 
 Articleschema.index({title: "text"});

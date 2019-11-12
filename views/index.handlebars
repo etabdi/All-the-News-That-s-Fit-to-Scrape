@@ -15,7 +15,32 @@
                     <form class="form-inline" action="/save/{{this.id}}" method="POST">
                         <button type="submit" class="btn btn-success">Save Article</button>
                     </form>
+<div class="container">
+  <div class="row">
+    {{#each data}}
+      <div class="col s12 m12 l6 xl4" id="{{this.url}}" style="display:inline-block;">
+        <div class="card" style="min-height:330.662px;">
+          <div class="card-image" style="position:relative;">
+            <div style="background-color: rgba(0,0,0,0.25); height: 100%; width: 100%; position:absolute; z-index:100;"></div>
+            <img src="{{this.imageURL}}">
+            <span class="card-title" style="font-size:2.1vh; text-shadow: 1px white; z-index:101;">{{this.headline}}</span>
+            <a class="addArticle btn-floating halfway-fab waves-effect waves-light red modal-trigger" style="z-index:101;" href="#modalMessage" data-headline="{{this.headline}} " data-imageURL="{{this.imageURL}}" data-url="{{this.url}}" data-summary="{{this.summary}}"
+              data-slug="{{this.slug}}"><i class="material-icons">add</i></a>
+          </div>
+          <div class="card-content">
+            <span class="card-title activator grey-text text-darken-4">{{this.slug}}<i class="material-icons right">more_vert</i></span>
+            <p><a href="{{this.url}}">Link to Article</a></p>
+          </div>
+          <div class="card-reveal" style="z-index:102;">
+            <span class="card-title grey-text text-darken-4">{{this.slug}}<i class="material-icons right">close</i></span>
+            <p>{{this.summary}}</p>
+          </div>
 
+        </div>
+      </div>
+    {{/each}}
+  </div>
+</div>
                </div>
             </div>
         </div>
