@@ -1,6 +1,6 @@
 # All-the-News-That-s-Fit-to-Scrape
 
-   ![Alt Text](https://github.com/etabdi/eat-da-burger/blob/Gpublic\assets\img\eat-du-burger.PNG)
+   ![Alt Text](https://github.com/etabdi/All-the-News-That-s-Fit-to-Scrape/blob/master/public/assets/img/logo.JPG)
       
 
 
