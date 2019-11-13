@@ -8,6 +8,7 @@
                     <h4>{{this.title}}</h4>
                                <summary>{{this.summary}}</summary>
                                 <img class="media" src="{{this.img}}">
+                                
                     <h4><a href="{{this.link}}">Read More</a></h4>
                 </div>
                 <hr>
@@ -16,6 +17,17 @@
                         <button type="submit" class="btn btn-success">Save Article</button>
                     </form>
 <div class="container">
+  <div class="row">
+  
+  </div>
+</div>
+               </div>
+            </div>
+        </div>
+    {{/each}}
+
+
+    <div class="container">
   <div class="row">
     {{#each data}}
       <div class="col s12 m12 l6 xl4" id="{{this.url}}" style="display:inline-block;">
@@ -41,13 +53,9 @@
     {{/each}}
   </div>
 </div>
-               </div>
-            </div>
-        </div>
-    {{/each}}
 </div>    
 <div class="footer">
-  <p>Footer</p>
+  <p></p>
 </div>
 
           

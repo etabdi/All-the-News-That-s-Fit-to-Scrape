@@ -8,15 +8,9 @@ var cheerio = require("cheerio");
 var databaseUrl = 'mongodb://localhost/true-news';
 var body = require("body-parser");
 var method = require("method-override");
-
-
 var app = express();
 app.use(express.static("public"));
 
-
-// Configure middleware
-
-// Use morgan logger for logging requests
 app.use(logger("dev"));
 // Parse request body as JSON
 app.use(express.urlencoded({ extended: true }));
@@ -80,8 +74,8 @@ app.get("/scrape", function(req, res) {
 
       var result = {};
       var summary = $(element).find("p.summary").text().trim();
-			var img = $(element).parent().find("figure.media").find("img").attr("src");
-     
+			var img = $(element).parent().find("figure.media").find("img").attr("src")
+			console.log(summary)
       result.title = $(this)
         .children("a")
         .text();
@@ -89,10 +83,15 @@ app.get("/scrape", function(req, res) {
         .children("a")
 		.attr("href");
 	
-		result.img =$(this)
-		  .children("img")
-		  .attr("href")
-
+		if (summary) {
+				result.summary = summary;
+			};
+			if (img) {
+				result.img = img;
+			}
+			else {
+				result.img = $(element).find(".wide-thumb").find("img").attr("src");
+			};
         var entry = new Article(result);
 			Article.find({title: result.title}, function(err, data) {
 				if (data.length === 0) {
