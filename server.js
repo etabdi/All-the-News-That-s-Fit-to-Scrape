@@ -78,10 +78,10 @@ app.get("/scrape", function(req, res) {
 			console.log(summary)
       result.title = $(this)
         .children("a")
-        .text();
+        .text(),
       result.link = $(this)
         .children("a")
-		.attr("href");
+		.attr("href")
 	
 		if (summary) {
 				result.summary = summary;
