@@ -16,18 +16,16 @@ body {
 /* include the board in the center of the viewport */
 .board {
 
-   margin: 40px auto;
+ 
    overflow:scroll;
   display: grid;
   height:600px;
-  background-image:none;
   font-size: 18px;
   background-color: #0f0101;
   border: 1px solid black;
   opacity: 0.8;
   filter: alpha(opacity=60); /* For IE8 and earlier */
   border: 4px solid hsl(207, 79%, 21%);
-
   box-shadow: 0 2px 5px hsla(0, 0%, 0%, 0.3);
   /* position relative to absolute position the pseudo element */
   position: relative;
@@ -138,31 +136,5 @@ a background is specified in the script */
 
 /* on smaller viewports */
 @media (max-width: 700px) {
-  /* change the grid layout to have the heading atop the navigation and section elements */
-  .board {
-    grid-template-areas: "heading heading" "nav section";
-    grid-template-columns: 1fr 2fr;
-    grid-template-rows: auto 1fr;
-  }
-  .board__heading {
-    grid-area: heading;
-  }
-  /* position the navigation items atop one another instead of side by side */
-  .board__nav {
-    grid-area: nav;
-    flex-direction: column;
-    /* at the top of the container */
-    align-self: start;
-  }
-  .board__nav .nav--item {
-    text-align: left;
-    margin: 0.75rem 0;
-  }
-
-  /* slightly increase the height of the container to include a taller board */
-  .board__news {
-    grid-area: section;
-    width: 90%;
-    max-height: 380px;
-  }
+ 
 }
