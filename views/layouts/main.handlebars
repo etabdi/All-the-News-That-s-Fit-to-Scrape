@@ -1,11 +1,11 @@
-ted HTML:
+
 <!DOCTYPE html>
 <html lang="en">
    <head>
       <title>All the news that fit scape</title>
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width, initial-scale=1">
-      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+            <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
       <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
       <link rel="stylesheet" href="/css/style.css" type="text/css">
       <script src="/assets/javascript/app.js"></script>
@@ -15,7 +15,7 @@ ted HTML:
       <nav class="navbar navbar-inverse">
          <div class="container-fluid">
             <div class="navbar-header">
-               <a class="navbar-brand" href="articles">True-News</a>
+               <a class="navbar-brand" href="/">True-News</a>
             </div>
             <ul class="nav navbar-nav">
                <li class="active"><a href="/">All Articles</a></li>
@@ -23,7 +23,9 @@ ted HTML:
                <li><a href="/saved">Saved</a></li>
             </ul>
          </div>
+         
       </nav>
+      </div>
       <div class="board">
       <h1 class="board__heading">
          News
@@ -31,16 +33,19 @@ ted HTML:
       <nav class="board__nav">
          {{{ body }}}
       </nav>
+    </body>  
       <div id="addnote">
+        <div class="form">
          <div id="note-displayer">
+            <h2>Note</h2>
           
-            <div id="note">
                <label for="note-title">Title</label><br>
                <input type="text" placeholder="Title" name="title" id="note-title"><br>
                <label for="note-body">Note</label><br>
                <textarea rows="7" placeholder="Note" id="note-body"></textarea><br>
                <button type="submit" id="add-note">Save Note</button>
-               <button type="button" id="close-note">Cancel</button>
+              <a href="/" >Back</a>
+            </div>
             </div>
          </div>
       </div>

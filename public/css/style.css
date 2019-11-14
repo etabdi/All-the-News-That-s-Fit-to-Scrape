@@ -22,7 +22,7 @@ body {
     width: 100%;
     height: 100%;
     background-color: rgba(0,0,0,0.9);
-    color: rgb(55, 4, 240);
+    color:orangered;
     z-index: 4;
 }
 /* include the board in the center of the viewport */

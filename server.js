@@ -112,7 +112,7 @@ app.get("/scrape", function(req, res) {
 app.get("/saved", function(req, res) {
 	Article.find({issaved: true}, null, {sort: {created: -1}}, function(err, data) {
 		if(data.length === 0) {
-			res.render("placeholder", {message: "You have not saved any articles yet. Try to save some delicious news by simply clicking \"Save Article\"!"});
+			res.render("placeholder");
 		}
 		else {
 			res.render("saved", {saved: data});
