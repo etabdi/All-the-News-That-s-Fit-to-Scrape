@@ -24,4 +24,4 @@ True-News Scrapper is a simple , easily navigatable site that allows user to scr
      morgan 
     
 ## Heroku Link:
-  ![Alt Text](https://true-news.herokuapp.com/)
+ https://true-news.herokuapp.com/
