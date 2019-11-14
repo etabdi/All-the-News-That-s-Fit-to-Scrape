@@ -57,7 +57,7 @@ app.listen(port, function() {
 app.get("/", function(req, res) {
 	Article.find({}, null, {sort: {created: -1}}, function(err, data) {
 		if(data.length === 0) {
-			res.render("placeholder", {message: "There's nothing scraped yet. Please click \"Scrape For Newest Articles\" for fresh and delicious news."});
+			res.render("index");
 		}
 		else{
 			res.render("index", {articles: data});
