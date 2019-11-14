@@ -12,7 +12,19 @@ body {
   font-family: "Open Sans", sans-serif;
   background-image: url("https://i.ytimg.com/vi/8kr-h0jQbEY/maxresdefault.jpg");
 }
-
+#addnote {
+	display: none;
+	justify-content: center;
+	align-items: center;
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.9);
+    color: rgb(55, 4, 240);
+    z-index: 4;
+}
 /* include the board in the center of the viewport */
 .board {
 

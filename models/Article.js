@@ -30,6 +30,10 @@ var Articleschema = new Schema({
 		type: Date,
 		default: Date.now
 	},
+	note: {
+		type: Schema.Types.ObjectId,
+		ref: "Note"
+	  }
 	
 });
 

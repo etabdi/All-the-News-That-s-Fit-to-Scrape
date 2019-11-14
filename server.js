@@ -10,6 +10,7 @@ var body = require("body-parser");
 var method = require("method-override");
 var app = express();
 app.use(express.static("public"));
+var Note = require("./models/Note");
 
 app.use(logger("dev"));
 // Parse request body as JSON
@@ -73,12 +74,12 @@ app.get("/scrape", function(req, res) {
     $("article h2").each(function(i, element) {
 
       var result = {};
-      var summary = $(element).find("p.summary").text().trim();
-			var img = $(element).parent().find("figure.media").find("img").attr("src")
-			console.log(summary)
+			var summary = $(element).find("p.summary").text().trim();
+			var img = $(element).find("figure.media").find("img").attr("src")
+					console.log(summary)
       result.title = $(this)
         .children("a")
-        .text(),
+		.text(),
       result.link = $(this)
         .children("a")
 		.attr("href")
@@ -92,12 +93,14 @@ app.get("/scrape", function(req, res) {
 			else {
 				result.img = $(element).find(".wide-thumb").find("img").attr("src");
 			};
-        var entry = new Article(result);
+		var entry = new Article(result);
+		
 			Article.find({title: result.title}, function(err, data) {
 				if (data.length === 0) {
 					entry.save(function(err, data) {
 						if (err) throw err;
 					});
+					
 				}
 			});
 		});
@@ -106,7 +109,6 @@ app.get("/scrape", function(req, res) {
 
 	});
 });
-
 app.get("/saved", function(req, res) {
 	Article.find({issaved: true}, null, {sort: {created: -1}}, function(err, data) {
 		if(data.length === 0) {
@@ -117,6 +119,13 @@ app.get("/saved", function(req, res) {
 		}
 	});
 });
+
+app.get("/:id", function(req, res) {
+	Article.findById(req.params.id, function(err, data) {
+		res.json(data);
+	})
+})
+
 
 app.post("/save/:id", function(req, res) {
 	Article.findById(req.params.id, function(err, data) {
@@ -133,5 +142,22 @@ app.post("/save/:id", function(req, res) {
 	});
 });
 
-;
+app.post("/note/:id", function(req, res) {
+	var note = new Note(req.body);
+	note.save(function(err, doc) {
+		if (err) throw err;
+		Article.findByIdAndUpdate(req.params.id, {$set: {"note": doc._id}}, {new: true}, function(err, newdoc) {
+			if (err) throw err;
+			else {
+				res.send(newdoc);
+			}
+		});
+	});
+});
 
+app.get("/note/:id", function(req, res) {
+	var id = req.params.id;
+	Article.findById(id).populate("note").exec(function(err, data) {
+		res.send(data.note);
+	})
+})
