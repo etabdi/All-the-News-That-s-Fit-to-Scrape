@@ -5,7 +5,7 @@
 
 
 
-Hacker News Scrapper is a simple , easily navigatable site that allows user to scrape current news article from The new york News. The site uses cheerio to scrame news and then store the data in mongoDb. Users can save.
+True-News Scrapper is a simple , easily navigatable site that allows user to scrape current news article from The new york News. The site uses cheerio to scrame news and then store the data in mongoDb. Users can save notes and read more about selected article through on click link.
 
 
 
@@ -24,3 +24,4 @@ Hacker News Scrapper is a simple , easily navigatable site that allows user to s
      morgan 
     
 ## Heroku Link:
+ https://true-news.herokuapp.com/
